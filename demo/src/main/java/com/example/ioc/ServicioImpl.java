@@ -12,11 +12,6 @@ public class ServicioImpl implements Servicio {
 	public ServicioImpl(Repositorio dao) {
 		this.dao = dao;
 	}
-	
-	@PostConstruct
-	private void inti() {
-		
-	}
 
 	public void add() {
 		dao.save();
