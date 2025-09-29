@@ -7,7 +7,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.event.EventListener;
 
+import com.example.ioc.Evento;
 import com.example.ioc.Pruebas;
 import com.example.ioc.Rango;
 import com.example.ioc.Servicio;
@@ -52,4 +54,8 @@ public class DemoApplication implements CommandLineRunner {
 //		otro.add();
 	}
 
+	@EventListener
+	void receptor(Evento e) {
+		System.out.println("evento -> " + e.getTipo());
+	}
 }
