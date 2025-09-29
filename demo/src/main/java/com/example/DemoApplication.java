@@ -31,7 +31,7 @@ public class DemoApplication implements CommandLineRunner {
 	@Value("${info.app.description:Sin descripcion}")
 	String cad;
 	
-//	@Autowired(required = false)
+	@Autowired(required = false)
 	private Rango rango;
 	
 	@Override
