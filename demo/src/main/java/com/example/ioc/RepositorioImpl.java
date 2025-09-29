@@ -1,10 +1,12 @@
 package com.example.ioc;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@Qualifier("prod")
+//@Qualifier("prod")
+@Profile("default")
 public class RepositorioImpl implements Repositorio {
 	private Config config;
 	

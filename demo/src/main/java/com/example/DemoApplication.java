@@ -2,6 +2,7 @@ package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,18 +18,22 @@ public class DemoApplication implements CommandLineRunner {
 	}
 
 	@Autowired
-	@Qualifier("prod")
+//	@Qualifier("prod")
 	private Servicio srv;
-	@Autowired
-	@Pruebas
-	private Servicio srvTest;
+//	@Autowired
+//	@Pruebas
+//	private Servicio srvTest;
+	
+	@Value("${info.app.description}")
+	String cad;
 	
 	@Override
 	public void run(String... args) throws Exception {
 		System.err.println("Aplicacion arrancada ...");
 		
 		srv.add();
-		srvTest.add();
+		System.err.println(cad);
+//		srvTest.add();
 		
 //		Servicio otro = new ServicioImpl(new RepositorioImpl(new ConfigImpl())) ;
 //		Servicio otro = new ServicioImpl(new RepositorioMock()) ;

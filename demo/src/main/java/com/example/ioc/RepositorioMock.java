@@ -3,6 +3,7 @@ package com.example.ioc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import jakarta.annotation.PostConstruct;
@@ -10,6 +11,7 @@ import jakarta.annotation.PostConstruct;
 @Repository
 //@Primary
 @Pruebas
+@Profile("test")
 public class RepositorioMock implements Repositorio {
 	@Autowired
 	private Config cfg;
