@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service;
 import jakarta.annotation.PostConstruct;
 
 @Service
-@Qualifier("prod")
-public class ServicioImpl implements Servicio {
+@Pruebas
+public class ServicioMock implements Servicio {
 	private Repositorio dao;
 	
-	public ServicioImpl(@Qualifier("prod") Repositorio dao) {
+	@Pruebas
+	public ServicioMock(@Pruebas Repositorio dao) {
 		this.dao = dao;
 	}
 

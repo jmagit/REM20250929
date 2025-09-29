@@ -1,16 +1,18 @@
 package com.example.ioc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import jakarta.annotation.PostConstruct;
 
 @Repository
-@Primary
+//@Primary
+@Pruebas
 public class RepositorioMock implements Repositorio {
 	@Autowired
-	private Config config;
+	private Config cfg;
 	
 	public RepositorioMock() {
 		// se precipita
@@ -19,7 +21,7 @@ public class RepositorioMock implements Repositorio {
 	
 	@PostConstruct
 	private void inti() {
-		config.configura();
+		cfg.configura();
 	}
 
 	@Override
