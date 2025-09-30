@@ -15,6 +15,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.example.aop.introductions.Visible;
 import com.example.ioc.DemoEvent;
 import com.example.ioc.IoCConfig;
 import com.example.ioc.Rango;
@@ -55,6 +56,11 @@ public class DemoApplication implements CommandLineRunner {
 	CommandLineRunner demosIoC(IoCConfig cnf) {
 		return args -> {
 			srv.add();
+			if(srv instanceof Visible v) {
+				System.out.println(v.isVisible() ? "Es visible" : "Invisible");
+			} else {
+				System.out.println("No implementa Visible");
+			}
 			System.out.println(cad);
 			if(rango != null)
 				System.out.println(rango);

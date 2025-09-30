@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import com.example.aop.anotations.Logged;
+import com.example.aop.anotations.LoggerAll;
+
 @Configuration
 @ComponentScan("com.example.ioc")
 public class IoCConfig {
@@ -26,5 +29,6 @@ public class IoCConfig {
 		};
 	}
 	
+	@LoggerAll
 	public int getValor() { return 10; }
 }
