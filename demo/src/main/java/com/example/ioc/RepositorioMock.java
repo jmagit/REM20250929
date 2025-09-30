@@ -33,6 +33,6 @@ public class RepositorioMock implements Repositorio {
 	@Override
 	public void save() {
 		System.out.println("Esto es una simulacion");
-		publisher.publishEvent(new Evento("Escritura"));
+		publisher.publishEvent(new DemoEvent("Escritura"));
 	}
 }

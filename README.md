@@ -6,6 +6,7 @@
 - [Eclipse IDE for Enterprise Java and Web Developers](https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2025-09/R/eclipse-jee-2025-09-R-win32-x86_64.zip)
   - Help > Eclipse Marketplace ... > [Spring Tools 4 (aka Spring Tool Suite 4)](https://marketplace.eclipse.org/content/spring-tools-4-aka-spring-tool-suite-4)
   - [Project Lombok](https://projectlombok.org/downloads/lombok.jar)
+    - **Instalación:** javaw -jar lombok.jar
 - Clientes de bases de datos (opcionales)
   - [HeidiSQL](https://www.heidisql.com/download.php)
   - [MongoDB Compass](https://www.mongodb.com/try/download/compass)
@@ -22,10 +23,19 @@
 
 ## Contenedores
 
-### Instalación Docker
+### Instalación Docker Desktop
 
-- <https://learn.microsoft.com/es-es/windows/wsl/install>
-- <https://docs.docker.com/desktop/install/windows-install/>
+- [WSL 2 feature on Windows](https://learn.microsoft.com/es-es/windows/wsl/install)
+- [Docker Desktop](https://www.docker.com/get-started/)
+
+#### Configuración de puertos dinámicos en Windows
+
+    netsh int ipv4 set dynamic tcp start=51000 num=14536
+
+#### Alternativas a Docker Desktop
+
+- [Podman](https://podman.io/docs/installation)
+- [Rancher Desktop](https://rancherdesktop.io/)
 
 ### Bases de datos
 

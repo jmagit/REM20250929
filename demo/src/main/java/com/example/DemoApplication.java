@@ -1,20 +1,24 @@
 package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 
-import com.example.ioc.Evento;
-import com.example.ioc.Pruebas;
+import com.example.ioc.DemoEvent;
+import com.example.ioc.IoCConfig;
 import com.example.ioc.Rango;
+import com.example.ioc.Repositorio;
 import com.example.ioc.Servicio;
+import com.example.ioc.ServicioImpl;
 
 @SpringBootApplication
+@ConfigurationPropertiesScan
 public class DemoApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
@@ -38,24 +42,30 @@ public class DemoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.err.println("Aplicacion arrancada ...");
 		
-		srv.add();
-		System.err.println(cad);
-		if(rango != null)
-			System.err.println(rango);
-		else
-			System.err.println("sin rango");
-//		srvTest.add();
-		
-//		Servicio otro = new ServicioImpl(new RepositorioImpl(new ConfigImpl())) ;
-//		Servicio otro = new ServicioImpl(new RepositorioMock()) ;
-//		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-//		Servicio otro = new ServicioImpl(ctx.getBean(Repositorio.class)) ;
-//
-//		otro.add();
+	}
+	
+	@Bean
+	CommandLineRunner demosIoC(Servicio srv) {
+		return args -> {
+			srv.add();
+			System.err.println(cad);
+			if(rango != null)
+				System.err.println(rango);
+			else
+				System.err.println("sin rango");
+//			srvTest.add();
+			
+//			Servicio otro = new ServicioImpl(new RepositorioImpl(new ConfigImpl())) ;
+//			Servicio otro = new ServicioImpl(new RepositorioMock()) ;
+			AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(IoCConfig.class);
+			Servicio otro = new ServicioImpl(ctx.getBean(Repositorio.class)) ;
+	
+			otro.add();
+		};
 	}
 
 	@EventListener
-	void receptor(Evento e) {
-		System.out.println("evento -> " + e.getTipo());
+	void receptor(DemoEvent e) {
+		System.out.println("Evento inteceptado en DemoApplication -> " + e.tipo());
 	}
 }
