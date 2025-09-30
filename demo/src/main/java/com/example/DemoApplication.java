@@ -25,7 +25,7 @@ import com.example.ioc.ServicioImpl;
 @SpringBootApplication
 // @EnableScheduling
 @EnableAspectJAutoProxy
-@ConfigurationPropertiesScan
+//@ConfigurationPropertiesScan
 public class DemoApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
@@ -52,16 +52,16 @@ public class DemoApplication implements CommandLineRunner {
 	}
 	
 	@Bean
-	CommandLineRunner demosIoC(Servicio srv) {
+	CommandLineRunner demosIoC(IoCConfig cnf) {
 		return args -> {
 			srv.add();
-			System.err.println(cad);
+			System.out.println(cad);
 			if(rango != null)
-				System.err.println(rango);
+				System.out.println(rango);
 			else
-				System.err.println("sin rango");
+				System.out.println("sin rango");
 //			srvTest.add();
-			
+			System.out.println("Valor config: %d".formatted(cnf.getValor()));
 //			Servicio otro = new ServicioImpl(new RepositorioImpl(new ConfigImpl())) ;
 //			Servicio otro = new ServicioImpl(new RepositorioMock()) ;
 //			AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(IoCConfig.class);

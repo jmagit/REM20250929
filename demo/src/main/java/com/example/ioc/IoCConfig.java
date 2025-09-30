@@ -25,4 +25,6 @@ public class IoCConfig {
 			}
 		};
 	}
+	
+	public int getValor() { return 10; }
 }

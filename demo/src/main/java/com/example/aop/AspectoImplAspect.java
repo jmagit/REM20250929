@@ -18,24 +18,32 @@ public class AspectoImplAspect {
 
 //	@Before("miPuntoDeCorte()")
 //	public void consejoAntesDelMetodo(JoinPoint jp) {
-//		System.out.println(">>> Soy un consejo antesDelMetodo " + jp.getSignature());
+//		System.err.println(">>> Soy un consejo antesDelMetodo " + jp.getSignature());
 //	}
-	
+//	
 //	@After("miPuntoDeCorte()")
 //	public void consejoDespuesDelMetodo(JoinPoint jp) {
-//		System.out.println(">>> Soy un consejo despuesDelMetodo " + jp.getSignature());
+//		System.err.println(">>> Soy un consejo despuesDelMetodo " + jp.getSignature());
 //	}
 
-//	@AfterReturning(pointcut="execution(int com.example.ioc..*.get*(..))",	returning="retVal")
-//	public void consejoDespuesDeGetPropiedad(JoinPoint jp, int retVal) {
-//		System.out.println(">>> La funcion '" + jp.getSignature() + "' ha devuelto " + retVal);
+	@AfterReturning(pointcut="execution(int com.example.ioc..*.get*(..))",	returning="retVal")
+	public void consejoDespuesDeGetPropiedad(JoinPoint jp, int retVal) {
+		System.err.println(">>> La funcion '" + jp.getSignature() + "' ha devuelto " + retVal);
+	}
+	
+//	@Around("execution(int com.example.ioc..*.get*(..)")
+//	public Object consejoQueEnvuelveAlMetodo(ProceedingJoinPoint jp) throws Throwable {
+//		System.err.println(">>> Soy el previo queEnvuelveAlMetodo " + jp.getSignature());
+//		int o = (int)jp.proceed();
+//		System.err.println(">>> Soy el posterior queEnvuelveAlMetodo " + jp.getSignature());
+//		return o * 2;
 //	}
 
 //	@Around("miPuntoDeCorte()")
 //	public Object consejoQueEnvuelveAlMetodo(ProceedingJoinPoint jp) throws Throwable {
-//		System.out.println(">>> Soy el previo queEnvuelveAlMetodo " + jp.getSignature());
+//		System.err.println(">>> Soy el previo queEnvuelveAlMetodo " + jp.getSignature());
 //		var o = jp.proceed();
-//		System.out.println(">>> Soy el posterior queEnvuelveAlMetodo " + jp.getSignature());
+//		System.err.println(">>> Soy el posterior queEnvuelveAlMetodo " + jp.getSignature());
 //		return o;
 //	}
 
