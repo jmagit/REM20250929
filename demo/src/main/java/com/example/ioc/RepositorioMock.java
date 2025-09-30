@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
+import com.example.ioc.anotaciones.Pruebas;
+
 import jakarta.annotation.PostConstruct;
 
 @Repository

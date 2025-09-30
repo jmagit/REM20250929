@@ -1,4 +1,4 @@
-package com.example.ioc;
+package com.example.ioc.anotaciones;
 
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.FIELD;
