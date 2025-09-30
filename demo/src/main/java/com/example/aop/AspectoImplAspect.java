@@ -11,7 +11,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Component
-@Aspect
+//@Aspect
 public class AspectoImplAspect {
 	@Pointcut("execution(public * com.example.ioc..*.*(..))")
 	public void miPuntoDeCorte() {}

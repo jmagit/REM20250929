@@ -54,7 +54,7 @@ public class DemoApplication implements CommandLineRunner {
 		
 	}
 	
-	@Bean
+//	@Bean
 	CommandLineRunner demosAOP(Dummy d1, Dummy d2, AuthenticationService auth) {
 		return args -> {
 			auth.login();
@@ -86,24 +86,24 @@ public class DemoApplication implements CommandLineRunner {
 
 	
 //	@Bean
-	CommandLineRunner demosIoC(Servicio srv) {
-		return args -> {
-			srv.add();
-			System.err.println(cad);
-			if(rango != null)
-				System.err.println(rango);
-			else
-				System.err.println("sin rango");
-//			srvTest.add();
-			
-//			Servicio otro = new ServicioImpl(new RepositorioImpl(new ConfigImpl())) ;
-//			Servicio otro = new ServicioImpl(new RepositorioMock()) ;
-			AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(IoCConfig.class);
-			Servicio otro = new ServicioImpl(ctx.getBean(Repositorio.class)) ;
-	
-			otro.add();
-		};
-	}
+//	CommandLineRunner demosIoC(Servicio srv) {
+//		return args -> {
+//			srv.add();
+//			System.err.println(cad);
+//			if(rango != null)
+//				System.err.println(rango);
+//			else
+//				System.err.println("sin rango");
+////			srvTest.add();
+//			
+////			Servicio otro = new ServicioImpl(new RepositorioImpl(new ConfigImpl())) ;
+////			Servicio otro = new ServicioImpl(new RepositorioMock()) ;
+//			AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(IoCConfig.class);
+//			Servicio otro = new ServicioImpl(ctx.getBean(Repositorio.class)) ;
+//	
+//			otro.add();
+//		};
+//	}
 
 	@EventListener
 	void receptor(DemoEvent e) {
