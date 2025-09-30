@@ -17,12 +17,12 @@ public class Dummy {
 	@LoggerAll
 	public int getValor() { return 10; }
 
-	public String getCreate() {
-		return create;
-	}
-//	public Optional<String> getCreate() {
-//		return Optional.ofNullable(create);
+//	public String getCreate() {
+//		return create;
 //	}
+	public Optional<String> getCreate() {
+		return Optional.ofNullable(create);
+	}
 	
 	public void setCreate(String value) {
 		create = value;

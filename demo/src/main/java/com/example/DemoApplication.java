@@ -15,6 +15,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.example.aop.AuthenticationService;
 import com.example.aop.introductions.Visible;
 import com.example.ioc.DemoEvent;
 import com.example.ioc.Dummy;
@@ -54,8 +55,9 @@ public class DemoApplication implements CommandLineRunner {
 	}
 	
 	@Bean
-	CommandLineRunner demosAOP(Dummy d1, Dummy d2) {
+	CommandLineRunner demosAOP(Dummy d1, Dummy d2, AuthenticationService auth) {
 		return args -> {
+			auth.login();
 			srv.add();
 			if(srv instanceof Visible v) {
 				System.out.println(v.isVisible() ? "Es visible" : "Invisible");
@@ -73,11 +75,11 @@ public class DemoApplication implements CommandLineRunner {
 			d1.setCreate("Modificado");
 //			d1.setCreate(null);
 //			d1.clearCreate();
-			System.out.println("Dummy 1: %s".formatted(d1.getCreate().toUpperCase()));
-//			d1.getCreate().ifPresentOrElse(
-//					s -> System.out.println("Dummy 1: %s".formatted(s.toUpperCase())), 
-//					() -> System.err.println("Dummy 1 es null")
-//					);
+//			System.out.println("Dummy 1: %s".formatted(d1.getCreate().toUpperCase()));
+			d1.getCreate().ifPresentOrElse(
+					s -> System.out.println("Dummy 1: %s".formatted(s.toUpperCase())), 
+					() -> System.err.println("Dummy 1 es null")
+					);
 			System.out.println("Dummy 2: %s".formatted(d2.getCreate()));
 		};
 	}

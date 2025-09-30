@@ -39,17 +39,17 @@ public class AspectoImplAspect {
 //		return o;
 //	}
 
-//	@Around("miPuntoDeCorte()")
-//	public Object consejoQueEnvuelveAlMetodo(ProceedingJoinPoint jp) throws Throwable {
-//		System.err.println(">>> Soy el previo queEnvuelveAlMetodo " + jp.getSignature());
-//		var o = jp.proceed();
-//		System.err.println(">>> Soy el posterior queEnvuelveAlMetodo " + jp.getSignature());
-//		if(o != null ) {
-//			System.err.println(">>> Valor devuelto " + o);
-//			if(o instanceof Number v)
-//				return v.doubleValue() * 2;
-//		}
-//		return o;
-//	}
+	@Around("miPuntoDeCorte()")
+	public Object consejoQueEnvuelveAlMetodo(ProceedingJoinPoint jp) throws Throwable {
+		System.err.println(">>> Soy el previo queEnvuelveAlMetodo " + jp.getSignature());
+		var o = jp.proceed();
+		System.err.println(">>> Soy el posterior queEnvuelveAlMetodo " + jp.getSignature());
+		if(o != null ) {
+			System.err.println(">>> Valor devuelto " + o);
+			if(o instanceof Number v)
+				return v.doubleValue() * 2;
+		}
+		return o;
+	}
 
 }
