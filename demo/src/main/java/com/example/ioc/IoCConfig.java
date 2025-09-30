@@ -28,7 +28,4 @@ public class IoCConfig {
 			}
 		};
 	}
-	
-	@LoggerAll
-	public int getValor() { return 10; }
 }
