@@ -20,6 +20,7 @@ import com.example.aop.AuthenticationService;
 import com.example.aop.introductions.Visible;
 import com.example.contracts.domain.repositories.ActoresRepository;
 import com.example.domain.entities.Actor;
+import com.example.domain.entities.Category;
 import com.example.domain.entities.models.ActorDTO;
 import com.example.domain.entities.models.ActorShort;
 import com.example.ioc.DemoEvent;
@@ -29,6 +30,8 @@ import com.example.ioc.Rango;
 import com.example.ioc.Repositorio;
 import com.example.ioc.Servicio;
 import com.example.ioc.ServicioImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import jakarta.transaction.Transactional;
 
@@ -112,7 +115,10 @@ public class DemoApplication implements CommandLineRunner {
 //		dao.queryByActorIdGreaterThan(195).forEach(a -> System.out.println(a.getActorId() + " " + a.getNombre()));
 //		dao.searchByActorIdGreaterThan(195, ActorDTO.class).forEach(System.out::println);
 //		dao.searchByActorIdGreaterThan(195, ActorShort.class).forEach(a -> System.out.println(a.getActorId() + " " + a.getNombre()));
-		dao.findByActorIdGreaterThan(200).forEach(a -> System.out.println(ActorDTO.from(a)));
+//		dao.findByActorIdGreaterThan(200).forEach(a -> System.out.println(ActorDTO.from(a)));
+		
+		System.out.println((new ObjectMapper()).writeValueAsString(new Category()));
+		System.out.println((new XmlMapper()).writeValueAsString(new Category()));
 	}
 	
 //	@Bean

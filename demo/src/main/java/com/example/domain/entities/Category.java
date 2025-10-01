@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 
 /**
  * The persistent class for the category database table.
@@ -13,22 +17,27 @@ import java.util.List;
 @Entity
 @Table(name="category")
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
+@JacksonXmlRootElement(localName = "categorias")
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="category_id", unique=true, nullable=false)
+	@JsonProperty("id")
 	private int categoryId;
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
+	@JsonIgnore
 	private Timestamp lastUpdate;
 
 	@Column(nullable=false, length=25)
+	@JsonProperty("categoria")
 	private String name;
 
 	//bi-directional many-to-one association to FilmCategory
 	@OneToMany(mappedBy="category")
+	@JsonIgnore
 	private List<FilmCategory> filmCategories;
 
 	public Category() {
