@@ -17,6 +17,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import com.example.aop.AuthenticationService;
 import com.example.aop.introductions.Visible;
+import com.example.contracts.domain.repositories.ActoresRepository;
+import com.example.domain.entities.Actor;
 import com.example.ioc.DemoEvent;
 import com.example.ioc.Dummy;
 import com.example.ioc.IoCConfig;
@@ -48,10 +50,33 @@ public class DemoApplication implements CommandLineRunner {
 	@Autowired(required = false)
 	private Rango rango;
 	
+	@Autowired
+	ActoresRepository dao;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		System.err.println("Aplicacion arrancada ...");
 		
+		System.out.println("Read --------------------------------------");
+		dao.findAll().forEach(System.out::println);
+		System.out.println("Create --------------------------------------");
+		var actor = new Actor(0, "Pepito", "Grillo");
+		var id = dao.save(actor).getActorId();
+		actor = null;
+		dao.findAll().forEach(System.out::println);
+		System.out.println("Update --------------------------------------");
+		var item = dao.findById(id);
+		if(item.isPresent()) {
+			actor = item.get();
+			actor.setFirstName(actor.getFirstName().toUpperCase());
+			dao.save(actor);
+		} else {
+			System.err.println("Actor %d no encontrado.".formatted(id));
+		}
+		dao.findAll().forEach(System.out::println);
+		System.out.println("Delete --------------------------------------");
+		dao.deleteById(id);
+		dao.findAll().forEach(System.out::println);
 	}
 	
 //	@Bean
