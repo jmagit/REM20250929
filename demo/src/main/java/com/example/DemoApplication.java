@@ -12,6 +12,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.event.EventListener;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -26,6 +27,8 @@ import com.example.ioc.Rango;
 import com.example.ioc.Repositorio;
 import com.example.ioc.Servicio;
 import com.example.ioc.ServicioImpl;
+
+import jakarta.transaction.Transactional;
 
 @SpringBootApplication
 // @EnableScheduling
@@ -54,29 +57,48 @@ public class DemoApplication implements CommandLineRunner {
 	ActoresRepository dao;
 	
 	@Override
+	@Transactional
 	public void run(String... args) throws Exception {
 		System.err.println("Aplicacion arrancada ...");
 		
-		System.out.println("Read --------------------------------------");
-		dao.findAll().forEach(System.out::println);
-		System.out.println("Create --------------------------------------");
-		var actor = new Actor(0, "Pepito", "Grillo");
-		var id = dao.save(actor).getActorId();
-		actor = null;
-		dao.findAll().forEach(System.out::println);
-		System.out.println("Update --------------------------------------");
-		var item = dao.findById(id);
+//		System.out.println("Read --------------------------------------");
+//		dao.findAll().forEach(System.out::println);
+//		System.out.println("Create --------------------------------------");
+//		var actor = new Actor(0, "Pepito", "Grillo");
+//		var id = dao.save(actor).getActorId();
+//		actor = null;
+//		dao.findAll().forEach(System.out::println);
+//		System.out.println("Update --------------------------------------");
+//		var item = dao.findById(id);
+//		if(item.isPresent()) {
+//			actor = item.get();
+//			actor.setFirstName(actor.getFirstName().toUpperCase());
+//			dao.save(actor);
+//		} else {
+//			System.err.println("Actor %d no encontrado.".formatted(id));
+//		}
+//		dao.findAll().forEach(System.out::println);
+//		System.out.println("Delete --------------------------------------");
+//		dao.deleteById(id);
+//		dao.findAll().forEach(System.out::println);
+		
+//		dao.findTop10ByFirstNameStartsWithOrderByLastNameDesc("P").forEach(System.out::println);
+//		dao.findTop10ByFirstNameStartsWith("P", Sort.by("FirstName").descending()).forEach(System.out::println);
+//		dao.findByActorIdGreaterThan(200).forEach(System.out::println);
+//		dao.findNuevosJPQL(200).forEach(System.out::println);
+//		dao.findNuevosSQL(200).forEach(System.out::println);
+//		dao.findAll((root, query, builder) -> builder.greaterThan(root.get("actorId"), 200)).forEach(System.out::println);
+//		dao.findAll((root, query, builder) -> builder.greaterThanOrEqualTo(root.get("actorId"), 200)).forEach(System.out::println);
+		
+		var item = dao.findById(1);
 		if(item.isPresent()) {
-			actor = item.get();
-			actor.setFirstName(actor.getFirstName().toUpperCase());
-			dao.save(actor);
+			var actor = item.get();
+			System.out.println(actor);
+			actor.getFilmActors().forEach(fm -> System.out.println(fm.getFilm()));
 		} else {
-			System.err.println("Actor %d no encontrado.".formatted(id));
+			System.err.println("Actor no encontrado.");
 		}
-		dao.findAll().forEach(System.out::println);
-		System.out.println("Delete --------------------------------------");
-		dao.deleteById(id);
-		dao.findAll().forEach(System.out::println);
+
 	}
 	
 //	@Bean
