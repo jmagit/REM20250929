@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.example.core.contracts.domain.repositories.RepositoryWithProjections;
 import com.example.core.domain.exceptions.DuplicateKeyException;
@@ -14,6 +15,7 @@ import com.example.domain.entities.Actor;
 import com.example.domain.entities.models.ActorDTO;
 import com.example.domain.entities.models.ActorShort;
 
+@RepositoryRestResource(exported = false)
 public interface ActoresRepository extends JpaRepository<Actor, Integer>, JpaSpecificationExecutor<Actor>, RepositoryWithProjections {
 	List<Actor> findTop10ByFirstNameStartsWithOrderByLastNameDesc(String prefijo);
 	List<Actor> findTop10ByFirstNameStartsWith(String prefijo, Sort orderBy);

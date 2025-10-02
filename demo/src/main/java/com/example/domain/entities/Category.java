@@ -2,6 +2,9 @@ package com.example.domain.entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -33,6 +36,8 @@ public class Category implements Serializable {
 	private Timestamp lastUpdate;
 
 	@Column(nullable=false, length=25)
+	@NotBlank
+	@Size(max = 25, min=2)
 	@JsonProperty("categoria")
 	private String name;
 
