@@ -14,6 +14,7 @@ import java.util.Objects;
 
 import com.example.core.domain.entities.AbstractEntity;
 import com.example.core.domain.validation.NIF;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -49,6 +50,7 @@ public class Actor extends AbstractEntity<Actor> implements Serializable {
 
 	//bi-directional many-to-one association to FilmActor
 	@OneToMany(mappedBy="actor", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<FilmActor> filmActors;
 
 	public Actor() {

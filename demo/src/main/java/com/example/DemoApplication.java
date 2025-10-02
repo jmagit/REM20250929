@@ -19,6 +19,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import com.example.aop.AuthenticationService;
 import com.example.aop.introductions.Visible;
 import com.example.contracts.domain.repositories.ActoresRepository;
+import com.example.contracts.domain.repositories.PeliculasRepository;
 import com.example.domain.entities.Actor;
 import com.example.domain.entities.Category;
 import com.example.domain.entities.models.ActorDTO;
@@ -60,6 +61,8 @@ public class DemoApplication implements CommandLineRunner {
 	
 	@Autowired
 	ActoresRepository dao;
+	@Autowired
+	PeliculasRepository pelis;
 	
 	@Override
 	@Transactional
@@ -116,9 +119,10 @@ public class DemoApplication implements CommandLineRunner {
 //		dao.searchByActorIdGreaterThan(195, ActorDTO.class).forEach(System.out::println);
 //		dao.searchByActorIdGreaterThan(195, ActorShort.class).forEach(a -> System.out.println(a.getActorId() + " " + a.getNombre()));
 //		dao.findByActorIdGreaterThan(200).forEach(a -> System.out.println(ActorDTO.from(a)));
-		
-		System.out.println((new ObjectMapper()).writeValueAsString(new Category()));
-		System.out.println((new XmlMapper()).writeValueAsString(new Category()));
+//		dao.findAllBy(ActorDTO.class).forEach(System.out::println);
+//		System.out.println((new ObjectMapper()).writeValueAsString(new Category()));
+//		System.out.println((new XmlMapper()).writeValueAsString(new Category()));
+//		System.out.println((new ObjectMapper()).writeValueAsString(dao.getById(1)));
 	}
 	
 //	@Bean

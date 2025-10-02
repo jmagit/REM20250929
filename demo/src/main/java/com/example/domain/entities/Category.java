@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -28,7 +29,7 @@ public class Category implements Serializable {
 	private int categoryId;
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
-	@JsonIgnore
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Timestamp lastUpdate;
 
 	@Column(nullable=false, length=25)

@@ -7,11 +7,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
+import com.example.core.contracts.domain.repositories.RepositoryWithProjections;
+import com.example.core.domain.exceptions.DuplicateKeyException;
+import com.example.core.domain.exceptions.NotFoundException;
 import com.example.domain.entities.Actor;
 import com.example.domain.entities.models.ActorDTO;
 import com.example.domain.entities.models.ActorShort;
 
-public interface ActoresRepository extends JpaRepository<Actor, Integer>, JpaSpecificationExecutor<Actor> {
+public interface ActoresRepository extends JpaRepository<Actor, Integer>, JpaSpecificationExecutor<Actor>, RepositoryWithProjections {
 	List<Actor> findTop10ByFirstNameStartsWithOrderByLastNameDesc(String prefijo);
 	List<Actor> findTop10ByFirstNameStartsWith(String prefijo, Sort orderBy);
 	
@@ -24,5 +27,16 @@ public interface ActoresRepository extends JpaRepository<Actor, Integer>, JpaSpe
 	List<ActorDTO> readByActorIdGreaterThan(int id);
 	List<ActorShort> queryByActorIdGreaterThan(int id);
 	<T> List<T> searchByActorIdGreaterThan(int id, Class<T> tipo);
+
+	default Actor insert(Actor item) throws DuplicateKeyException {
+		if(existsById(item.getActorId()))
+			throw new DuplicateKeyException();
+		return save(item);
+	}
+	default Actor update(Actor item) throws NotFoundException {
+		if(!existsById(item.getActorId()))
+			throw new NotFoundException();
+		return save(item);
+	}
 
 }
