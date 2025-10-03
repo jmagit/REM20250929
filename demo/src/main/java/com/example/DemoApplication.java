@@ -18,6 +18,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import com.example.aop.AuthenticationService;
 import com.example.aop.introductions.Visible;
+import com.example.contracts.application.EMailService;
 import com.example.contracts.domain.repositories.ActoresRepository;
 import com.example.contracts.domain.repositories.PeliculasRepository;
 import com.example.domain.entities.Actor;
@@ -125,6 +126,13 @@ public class DemoApplication implements CommandLineRunner {
 //		System.out.println((new XmlMapper()).writeValueAsString(new Category()));
 //		System.out.println((new ObjectMapper()).writeValueAsString(dao.getById(1)));
 	}
+
+//	@Bean
+//	CommandLineRunner demosCorreos(EMailService correo) {
+//		return args -> {
+//			correo.sendEmail("pgrillo@example.com", "Aplicacion", "La aplicacion se ha iniciado");
+//		};
+//	}
 	
 //	@Bean
 	CommandLineRunner demosAOP(Dummy d1, Dummy d2, AuthenticationService auth) {
