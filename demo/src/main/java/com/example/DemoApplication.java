@@ -18,6 +18,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import com.example.aop.AuthenticationService;
 import com.example.aop.introductions.Visible;
+import com.example.application.services.NotificationService;
 import com.example.contracts.application.EMailService;
 import com.example.contracts.domain.repositories.ActoresRepository;
 import com.example.contracts.domain.repositories.PeliculasRepository;
@@ -35,6 +36,7 @@ import com.example.ioc.ServicioImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
+import jakarta.annotation.PreDestroy;
 import jakarta.transaction.Transactional;
 
 @SpringBootApplication
@@ -127,12 +129,20 @@ public class DemoApplication implements CommandLineRunner {
 //		System.out.println((new ObjectMapper()).writeValueAsString(dao.getById(1)));
 	}
 
-//	@Bean
-//	CommandLineRunner demosCorreos(EMailService correo) {
-//		return args -> {
-//			correo.sendEmail("pgrillo@example.com", "Aplicacion", "La aplicacion se ha iniciado");
-//		};
-//	}
+	@Bean
+	CommandLineRunner demosCorreos(NotificationService correo) {
+		return args -> {
+			correo.sendEmail("pgrillo@example.com", "Aplicacion Init", "La aplicacion se ha iniciado");
+			correo.sendWelcomeEmail("pgrillo@example.com", "Pepito Grillo");;
+		};
+	}
+	@Autowired
+	EMailService correo;
+	
+	@PreDestroy
+	void despidete() {
+		correo.sendEmail("pgrillo@example.com", "Aplicacion Close", "La aplicacion se ha cerrado");
+	}
 	
 //	@Bean
 	CommandLineRunner demosAOP(Dummy d1, Dummy d2, AuthenticationService auth) {

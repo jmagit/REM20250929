@@ -17,4 +17,13 @@ public final class CadenasValidator {
 	public static boolean isNotNIF(String value) {
 		return !isNIF(value);
 	}
+
+	public static boolean isMayusculas(String value) {
+		if(value == null) throw new IllegalArgumentException("Value vacio");
+		return value.equals(value.toUpperCase());
+	}
+
+	public static boolean isNotMayusculas(String value) {
+		return !isMayusculas(value);
+	}
 }
