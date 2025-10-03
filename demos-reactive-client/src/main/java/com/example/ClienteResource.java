@@ -20,11 +20,10 @@ public class ClienteResource {
 	@GetMapping("/page/rapido")
 	Flux<Persona> rapido(@RequestParam(required = true, defaultValue = "20") int rows) {
 		WebClient client = WebClient.create(urlServidor);
-		return Flux.merge(
-				client.get().uri("/actores/v1?page=0&rows=" + rows).retrieve().bodyToFlux(Persona.class), 
-				client.get().uri("/actores/v1?page=1&rows=" + rows).retrieve().bodyToFlux(Persona.class), 
-				client.get().uri("/actores/v1?page=2&rows=" + rows).retrieve().bodyToFlux(Persona.class)
-			);
+		Flux<Persona> l1 = client.get().uri("/actores/v1?page=0&rows=" + rows).retrieve().bodyToFlux(Persona.class);
+		var l2 = client.get().uri("/actores/v1?page=1&rows=" + rows).retrieve().bodyToFlux(Persona.class);
+		var l3 = client.get().uri("/actores/v1?page=2&rows=" + rows).retrieve().bodyToFlux(Persona.class);
+		return Flux.merge(l1, l2, l3);
 	}
 	@GetMapping("/page/lento")
 	Flux<Persona> lento(@RequestParam(required = true, defaultValue = "20") int rows) {
